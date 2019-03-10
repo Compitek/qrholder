@@ -1,0 +1,194 @@
+openapi: 3.0.0
+info:
+  title: qrHolder API
+  description: This is an API for qr holder project
+  contact:
+    email: n6163957@gmail.com
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  version: 1.0.0
+servers:
+- url: https://virtserver.swaggerhub.com/n6163957/qrHolder/1.0.0
+  description: SwaggerHub API Auto Mocking
+- url: https://{host}:{port}/qrHolder/1.0.0
+  variables:
+    host:
+      description: Customer ID assigned by the service provider
+      default: virtserver.swaggerhub.com/n6163957
+    port:
+      default: "443"
+      enum:
+      - "443"
+tags:
+- name: suppliers
+  description: Operations available to suppliers
+- name: customers
+  description: Operations available to customers
+- name: admins
+  description: Secured Admin-only calls
+paths:
+  /qr/{uuid}:
+    get:
+      tags:
+      - suppliers
+      summary: searches a qr
+      description: |
+        By passing in the appropriate options, you can search for
+        available qr code
+      operationId: searchQr
+      parameters:
+      - name: uuid
+        in: path
+        description: uuid to find
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+          format: uuid
+          example: d290f1ee-6c54-4b01-90e6-d701748f0851
+      responses:
+        200:
+          description: search results matching criteria
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/QR'
+        400:
+          description: Bad input parameter
+        500:
+          description: Internal server error
+        503:
+          description: Service unavailable
+  /qr/generate:
+    post:
+      tags:
+      - customers
+      summary: generate a new qr item
+      description: Generates and Adds a new qr item to the system
+      operationId: generateQR
+      parameters:
+      - name: namespace
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          maximum: 4000
+          type: string
+          default: root
+      - name: description
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          maximum: 4000
+          minimum: 0
+          type: string
+      responses:
+        201:
+          description: Item created
+        400:
+          description: Bad input parameter
+        500:
+          description: Internal server error
+        503:
+          description: Service unavailable
+  /qr/report/common:
+    get:
+      tags:
+      - customers
+      summary: get a report about qr
+      description: get the data about quantity of qr codes
+      operationId: generate the report
+      responses:
+        200:
+          description: common report
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/CommonReportRow'
+        400:
+          description: Bad input parameter
+        500:
+          description: Internal server error
+        503:
+          description: Service unavailable
+  /qr:
+    post:
+      tags:
+      - admins
+      summary: adds a qr
+      description: adds a new qr, if there is no the same uuid in the database
+      operationId: addQr
+      requestBody:
+        description: qr object for save
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/QR'
+        required: true
+      responses:
+        201:
+          description: Item created
+        400:
+          description: Bad input parameter
+        422:
+          description: Unprocessable Entity. Entity with the same uuid already created
+        500:
+          description: Internal server error
+        503:
+          description: Service unavailable
+components:
+  schemas:
+    QR:
+      required:
+      - namespace
+      - numberOfChecks
+      - releaseDate
+      - uuid
+      type: object
+      properties:
+        namespace:
+          maximum: 4000
+          type: string
+          example: goods/wear/socks
+        uuid:
+          type: string
+          format: uuid
+          example: d290f1ee-6c54-4b01-90e6-d701748f0851
+        releaseDate:
+          type: string
+          format: date-time
+        checks:
+          type: array
+          items:
+            type: string
+            format: date-time
+        description:
+          maximum: 4000
+          minimum: 0
+          type: string
+          example: |
+            {
+            "name": "red socks",
+            "description":" soft pleasant socks for men and women;",
+            "image": "/images/pic2231.jpg",
+            "html":"<div><h1>red socks is good</h1><img src='http://'></div>"
+            }
+    CommonReportRow:
+      type: object
+      properties:
+        count:
+          type: integer
+          example: 5
+        namespace:
+          maximum: 4000
+          type: string
+          example: goods/wear/socks
