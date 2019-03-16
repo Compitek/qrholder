@@ -19,6 +19,8 @@ gradle run
 <br>
 hope you see "hello world" result.
 </ul>
+
+
 <h2>Step1: Kotlin / Spring Boot application with simple controller</h2>
 <ul>
 <li>Across <a href="https://docs.spring.io/spring-boot/docs/2.1.3.RELEASE/reference/htmlsingle/#using-boot-gradle">Spring-boot reference</a>, 
@@ -45,26 +47,29 @@ Add kotlin-stdlib-jdk8, kotlin-reflect, jackson-module-kotlin dependencies.<br>
 Add <a href="https://spring.io/guides/tutorials/spring-boot-kotlin/#_compiler_options">
 compiler options</a>. Add "targetCompatibility" and "version" parameters. 
 
-
 <li> Remove App.kt and it test. Add <a href="https://kotlinlang.org/docs/tutorials/spring-boot-restful.html#creating-the-application-class">Application class</a> instead. 
 <br>Add simple controller.
 
 <li>Build and start your project in CLI:
- <i><b> 
-  gradlew bootRun
- </b></i>
-  Check your controller on <a href="http://localhost:8080/test">http://localhost:8080/test</a> after start.<br>
-      Shutdown application with "Stop" button or Ctrl+f2.
+<i><b> 
+gradlew bootRun
+</b></i>
+Check your controller on <a href="http://localhost:8080/test">http://localhost:8080/test</a> after start.<br>
+Shutdown application with "Stop" button or Ctrl+f2.
   
- <li> Configure your project in Intellij Idea;
- check gradle version: menu Run > Settings > 
- "Build, execution, deployment" > "Build tools" > Gradle.
- Check "use local gradle distribution" and set correct gradle path.
- <li> Build and start your project in Intellij Idea; 
-  open Gradle panel   (menu View > "Tool windows" > Gradle) 
-  and double click "clean" (Tasks > build > clean) 
-  and "bootRun" (Tasks > application > bootRun).<br>
-    Check your controller on <a href="http://localhost:8080/test">http://localhost:8080/test</a> after start.<br>
-    Shutdown application with "Stop" button or Ctrl+f2.
+<li> Configure your project in Intellij Idea;
+check gradle version: menu Run > Settings > 
+"Build, execution, deployment" > "Build tools" > Gradle.
+Check "use local gradle distribution" and set correct gradle path.
+<li> Build and start your project in Intellij Idea; 
+open Gradle panel   (menu View > "Tool windows" > Gradle) 
+and double click "clean" (Tasks > build > clean) 
+and "bootRun" (Tasks > application > bootRun).<br>
+Check your controller on <a href="http://localhost:8080/test">http://localhost:8080/test</a> after start.<br>
+Shutdown application with "Stop" button or Ctrl+f2.
+</ul>
  
+<h2>Step2: swagger codegen for openapi.yaml</h2>
+<ul>
+<li>
  
