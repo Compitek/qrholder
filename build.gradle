@@ -30,6 +30,8 @@ bootWar{
 }
 
 sourceCompatibility = 1.8
+targetCompatibility = '1.8'
+version = '1.0.0-SNAPSHOT'
 compileKotlin {
     kotlinOptions {
         freeCompilerArgs = ["-Xjsr305=strict"]
