@@ -1,4 +1,4 @@
-package net.compitek.qrholder
+package net.compitek.qrholder.controller
 
 import io.swagger.annotations.ApiOperation
 import io.swagger.annotations.ApiResponse
