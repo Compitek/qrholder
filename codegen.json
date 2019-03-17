@@ -1,0 +1,7 @@
+{
+  "library": "spring-mvc",
+  "dateLibrary": "java8",
+  "modelPackage": "net.compitek.qrholder.model",
+  "apiPackage": "net.compitek.qrholder.api",
+  "interfaceOnly": true
+}

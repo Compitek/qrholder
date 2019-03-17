@@ -7,6 +7,8 @@ plugins {
     id 'org.jetbrains.kotlin.jvm' version '1.3.21'
     id "org.jetbrains.kotlin.plugin.spring" version '1.3.21'
     id 'org.jetbrains.kotlin.plugin.jpa' version '1.3.21'
+
+    id 'org.hidetake.swagger.generator' version '2.17.0'
 }
 
 repositories{
@@ -22,16 +24,20 @@ dependencies {
     implementation 'com.fasterxml.jackson.module:jackson-module-kotlin'
     implementation 'org.jetbrains.kotlin:kotlin-reflect'
     implementation 'org.jetbrains.kotlin:kotlin-stdlib-jdk8'
-}
 
+    //https://github.com/int128/gradle-swagger-generator-plugin
+    swaggerCodegen 'io.swagger.codegen.v3:swagger-codegen-cli:3.0.0'// or Swagger Codegen V3
+    implementation 'io.swagger:swagger-annotations:1.5.22'
+}
 
 bootWar{
     mainClassName ='net.compitek.qrholder.Application'
 }
 
 sourceCompatibility = 1.8
-targetCompatibility = '1.8'
+targetCompatibility = 1.8
 version = '1.0.0-SNAPSHOT'
+
 compileKotlin {
     kotlinOptions {
         freeCompilerArgs = ["-Xjsr305=strict"]
@@ -43,4 +49,18 @@ compileTestKotlin {
         freeCompilerArgs = ["-Xjsr305=strict"]
         jvmTarget = "1.8"
     }
+}
+
+swaggerSources {
+    qrholder {
+        inputFile = file('src/main/resources/openapi.yaml')
+        code {
+            language = 'spring'
+            configFile = file('codegen.json')
+        }
+    }
+}
+
+sourceSets {
+    main.java.srcDirs += "$swaggerSources.qrholder.code.outputDir/src/main/java"
 }
