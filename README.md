@@ -104,4 +104,5 @@ And get http status 200 and empty json array:
 <br><b><i>
 [{"count":0,"namespace":"/test"}]
 </b></i>
- 
+ <h2> Step 3. Add qrCode manager (generator) based on <a href="https://github.com/zxing/zxing">zxing</a> library</h>  
+ <li> Add zxing core dependency.
