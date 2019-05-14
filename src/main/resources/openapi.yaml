@@ -153,6 +153,7 @@ components:
       - numberOfChecks
       - releaseDate
       - uuid
+      - data
       type: object
       properties:
         namespace:
@@ -171,6 +172,9 @@ components:
           items:
             type: string
             format: date-time
+        data:
+          type: string
+          format: binary
         description:
           maximum: 4000
           minimum: 0
