@@ -153,6 +153,7 @@ components:
       - numberOfChecks
       - releaseDate
       - uuid
+      - data
       type: object
       properties:
         namespace:
