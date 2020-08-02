@@ -2,6 +2,10 @@
 https://github.com/Compitek/qrholder
 https://app.swaggerhub.com/apis/n6163957/qrHolder/1.0.0
 
+
+"How to" start an api-first project with gradle, Springboot, kotlin  and swagger codegen
+
+
 <h2>Initial:</h2>
 <ul>
 <li>Create qrHolder directory
